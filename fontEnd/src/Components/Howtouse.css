@@ -1,0 +1,67 @@
+.how-to-use-container {
+    text-align: center;
+    padding: 40px;
+}
+  
+.header-container {
+    margin-bottom: 1px;
+  }
+  
+h2 {
+    font-size: 28px;
+    margin-bottom: 1px;
+}
+  
+p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 32px;
+}
+  
+.steps-container {
+    display: flex;
+    justify-content: space-around;
+}
+  
+.step-box {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #004aad;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+  
+.step-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 74, 173, 0.5);
+}
+  
+.step-number {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.icon img{
+    width: 50px;
+    height: auto;
+}
+  
+.step-content {
+    text-align: left;
+
+}
+  
+.heading3 {
+    font-size: 24px;
+    font-weight: 1000;
+    margin-bottom: 12px;
+    margin-top: 10px;
+}
+  
+.step-content p {
+    font-size: 15px;
+    color: black;
+}
