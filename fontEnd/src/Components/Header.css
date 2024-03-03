@@ -1,20 +1,21 @@
+/* Header Container */
 .header-container {
     text-align: center;
     padding: 40px;
 }
-  
-h1 {
+
+.header-container h1 {
     font-size: 28px;
     margin-bottom: 16px;
 }
-  
+
 .header-text {
     font-size: 15px;
     color: #555;
     margin-left: 250px;
     margin-right: 250px;
 }
-  
+
 .upload-box {
     border: 2px dashed #004aad;
     padding: 70px;
@@ -23,11 +24,61 @@ h1 {
     max-width: 400px;
     font-size: 15px;
 }
-  
+
+.result-container{
+    border: 2px dashed #00ad25;
+    padding: 50px;
+    margin: 0 auto;
+    margin-top: 30px;
+    max-width: 600px;
+    font-size: 15px;
+}
+
 .box-content {
     text-align: center;
 }
-  
+
+/* New file input area styles */
+.file-label {
+    border: 2px dashed #004aad;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input:hover + .custom-file-upload {
+    background-color: #00307f;
+}
+
+.file-input:focus + .custom-file-upload {
+    background-color: #00307f;
+}
+
+.custom-file-upload {
+    padding: 10px 20px;
+    background-color: #004aad;
+    color: white;
+    border: 1px solid #004aad;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.custom-file-upload:hover {
+    background-color: #00307f;
+}
+
+.custom-file-upload:active {
+    background: white;
+    color: black;
+}
+
 button {
     padding: 10px 20px;
     background-color: #004aad;
@@ -39,12 +90,87 @@ button {
     margin-top: 16px;
     font-weight: 600;
 }
-  
+
 button:hover {
     background-color: #00307f;
 }
 
-button:active{
+button:active {
     background: white;
     color: black;
 }
+
+/* Additional styles for Result Container */
+.result-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.converted-text-container {
+    width: 60%; /* Adjust the width as needed */
+}
+
+#converted_text {
+    width: 100%;
+}
+
+.extract-text-button {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: white;
+    border: 1px solid #ffc107;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 16px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.extract-text-button:hover {
+    background-color: #ffca28; /* Lighter yellow color on hover */
+}
+
+
+.copy-text-button{
+    padding: 10px 20px;
+    background-color: #1f9407;
+    color: white;
+    border: 1px solid #1f9407;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 16px;
+    font-weight: 600;
+    margin-left: 5px;
+    align-self: flex-start;
+}
+.copy-text-button:hover {
+    background-color:#1dad00 /* Lighter yellow color on hover */
+}
+
+/* Additional styles for Result Container */
+.result-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Adjust the flex direction to display elements vertically */
+    align-items: center; /* Center items horizontally */
+  }
+  
+  .converted-text-container {
+    width: 100%; /* Adjust the width as needed */
+    text-align: center; /* Center text within the container */
+  }
+  
+  #converted_text {
+    width: 100%;
+  }
+ 
+  
+
+  .copy-text-button:active {
+    background: white;
+    color: black;
+  }
+  
