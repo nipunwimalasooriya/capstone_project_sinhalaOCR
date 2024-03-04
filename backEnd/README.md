@@ -20,7 +20,7 @@ uvicorn server:app --reload
 .\venv\Scripts\activate
 
 
-
+//To 
 cd capstone_project_sinhalaOCR\backEnd
 cd capstone_project_sinhalaOCR\fontend
 
