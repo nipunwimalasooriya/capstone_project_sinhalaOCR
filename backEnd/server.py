@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, File, UploadFile, BackgroundTasks
+from fastapi import FastAPI, Request, UploadFile, BackgroundTasks, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -19,42 +19,28 @@ app.add_middleware(
 )
 
 # Serve the React app
-app.mount("/", StaticFiles(directory="templates/fontEnd", html=True), name="static")
+app.mount("/", StaticFiles(directory="templates/fontEnd/build", html=True), name="static")
 
 @app.get("/")
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+# @app.get("/")
+# async def read_root():
+#     return {"message": "Welcome to the FastAPI application!"}
+
 @app.get("/api/data")
 async def get_data():
     return {"message": "API endpoint works"}
 
-# Import necessary modules
-
 @app.post("/api/v1/extract_text")
-async def extract_text(request: Request, bg_task: BackgroundTasks):
-    images = await request.form()
-
-    if "image" in images:
-        # Single file case
-        image = images["image"]
-        temp_file = _save_file_to_disk(image, path="temp", save_as="temp")
+async def extract_text(request: Request, bg_task: BackgroundTasks, file: UploadFile = File(...)):
+    try:
+        temp_file = _save_file_to_disk(file, path="temp", save_as="temp")
         text = await ocr.read_image(temp_file)
-        return {"filename": image.filename, "text": text}
-    elif images and all(image.filename for image in images.values()):
-        # Multiple files case with valid filenames
-        folder_name = str(uuid.uuid4())
-        os.mkdir(folder_name)
-
-        for image in images.values():
-            temp_file = _save_file_to_disk(
-                image, path=folder_name, save_as=image.filename
-            )
-
-        bg_task.add_task(ocr.read_images_from_dir, folder_name, write_to_file=True)
-        return {"task_id": folder_name, "num_files": len(images)}
-    else:
-        return {"error": "No valid files provided in the request"}
+        return {"filename": file.filename, "text": text}
+    except Exception as e:
+        return {"error": str(e)}
 
 def _save_file_to_disk(uploaded_file, path=".", save_as="default"):
     extension = os.path.splitext(uploaded_file.filename)[-1]
