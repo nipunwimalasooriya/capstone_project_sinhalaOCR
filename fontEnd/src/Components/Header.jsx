@@ -50,7 +50,7 @@ const Header = () => {
 
     var promise = new Promise(function (resolve, reject) {
       $.ajax({
-        type: "POST",
+        type: "Post",
         url: endpoint,
         data: formData,
         contentType: false,
