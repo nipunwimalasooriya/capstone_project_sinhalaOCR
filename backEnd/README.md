@@ -17,3 +17,14 @@ pip install -r requirements.txt
 cd src
 uvicorn server:app --reload
 ```
+.\venv\Scripts\activate
+
+
+//To 
+cd capstone_project_sinhalaOCR\backEnd
+cd capstone_project_sinhalaOCR\fontend
+
+.\myenv\Scripts\activate
+
+
+uvicorn server:app --reload
