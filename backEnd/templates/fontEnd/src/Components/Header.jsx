@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Header.css";
-import $ from "jquery";
+
 
 const Header = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -36,61 +36,45 @@ const Header = () => {
     document.getElementById("image_file").click();
   };
 
-  const extractText = () => {
+  const extractText = async () => {
     // Reset selected files after extraction
     setSelectedFiles([]);
   
     // Rest of the performOCR logic
-    var files = document.getElementById("image_file").files;
-    var formData = new FormData();
-    var endpoint = "/api/v1/extract_text";
-
+    const files = document.getElementById("image_file").files;
+    const formData = new FormData();
+    const endpoint = "http://127.0.0.1:8000/api/v1/extract_text";
   
     if (files.length === 1) {
       formData.append("image", files[0]);
     } else {
-      for (var i = 0; i < files.length; i++) {
-        formData.append("image" + i.toString(), files[i]);
+      for (let i = 0; i < files.length; i++) {
+        formData.append(`image${i}`, files[i]);
       }
-      var endpoint = "/api/v1/extract_text";
-
     }
   
-    // Use a promise to handle the asynchronous AJAX call
-    var promise = new Promise(function (resolve, reject) {
-      $.ajax({
-        type: "POST",
-        url: endpoint,
-        data: formData,
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (data) {
-          console.log("OCR API Response:", data); // Log the response for debugging
-          resolve(data);
-        },
-        error: function (error) {
-          console.error("OCR API Error:", error); // Log the error for debugging
-          reject(error);
-        },
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
       });
-    });
   
-    // After the AJAX call is successful, update the textarea
-    promise
-      .then(function (data) {
-        console.log("Data received:", data); // Log the data for debugging
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
   
-        if (endpoint === "/api/v1/extract_text") {
-          // Assuming data.image contains the image URL or data
-          setConvertedText(data.text);
-        } else {
-          getConvertedFiles(data.task_id, data.num_files);
-        }
-      })
-      .catch(function (error) {
-        console.error("Error:", error);
-      });
+      const data = await response.json();
+      console.log("OCR API Response:", data);
+  
+      if (endpoint === "http://127.0.0.1:8000/api/v1/extract_text") {
+        // Assuming data.image contains the image URL or data
+        setConvertedText(data.text);
+      } else {
+        getConvertedFiles(data.task_id, data.num_files);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   
   function getConvertedFiles(taskID, numFiles) {
