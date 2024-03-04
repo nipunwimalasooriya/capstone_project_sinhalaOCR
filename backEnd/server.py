@@ -37,7 +37,8 @@ async def home(request: Request):
 
 # @app.get("/")
 # async def home(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
+#     return templates.TemplateResponse("index.html", {"request": request}) 
+#check
 
 
 @app.post("/api/v1/extract_text")
