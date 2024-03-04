@@ -7,6 +7,8 @@ const Header = () => {
   const [convertedText, setConvertedText] = useState("");
   const convertedTextRef = useRef(null);
 
+
+
   const copyText = () => {
     var convertedTextElement = convertedTextRef.current;
     if (convertedTextElement && convertedTextElement.value.trim() !== "") {
@@ -41,7 +43,8 @@ const Header = () => {
     // Rest of the performOCR logic
     var files = document.getElementById("image_file").files;
     var formData = new FormData();
-    var endpoint = "http://127.0.0.1:8000/api/v1/extract_text";
+    var endpoint = "/api/v1/extract_text";
+
   
     if (files.length === 1) {
       formData.append("image", files[0]);
@@ -49,7 +52,8 @@ const Header = () => {
       for (var i = 0; i < files.length; i++) {
         formData.append("image" + i.toString(), files[i]);
       }
-      endpoint = "http://127.0.0.1:8000/api/v1/bulk_extract_text";
+      var endpoint = "/api/v1/extract_text";
+
     }
   
     // Use a promise to handle the asynchronous AJAX call
@@ -77,7 +81,7 @@ const Header = () => {
       .then(function (data) {
         console.log("Data received:", data); // Log the data for debugging
   
-        if (endpoint === "http://127.0.0.1:8000/api/v1/extract_text") {
+        if (endpoint === "/api/v1/extract_text") {
           // Assuming data.image contains the image URL or data
           setConvertedText(data.text);
         } else {
@@ -138,7 +142,7 @@ const Header = () => {
           <div className="converted-text-container ">
             <label htmlFor="converted_text">Converted Text:</label>
             {typeof convertedText === "string" ? (
-              <img src={convertedText} alt="Scanned Image" />
+              <img src={convertedText} alt="Scaned text" />
             ) : (
               <textarea
                 id="converted_text"
