@@ -10,9 +10,9 @@ import ocr
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
-def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# @app.get("/")
+# def home(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/api/v1/extract_text")
 async def extract_text(image: UploadFile = File(...)):
@@ -46,22 +46,3 @@ def _save_file_to_disk(uploaded_file, path=".", save_as="default"):
     with open(temp_file, "wb") as buffer:
         shutil.copyfileobj(uploaded_file.file, buffer)
     return temp_file
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["http://localhost:3000"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-# Serve the React app
-# app.mount("/", StaticFiles(directory="templates/fontEnd/build", html=True), name="static")
-
-# @app.get("/")
-# async def home(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
-
-# @app.get("/")
-# async def read_root():
-#     return {"message": "Welcome to the FastAPI application!"}
