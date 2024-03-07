@@ -7,30 +7,34 @@ import Faq from "./Components/Faq";
 import Footer from "./Components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginSignup from "./Pages/LoginSignup";
+import { selectUsers } from "./store/usersSlice.js";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector(selectUsers);
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          {/* <Route path='/' element={<div><LoginSignup/></div>} /> */}
-          <Route
-            path="/"
-            element={
-              <div>
-                <Header />
-                <Howtouse />
-                <Aboutus />
-                <Faq />
-                <Footer />
-              </div>
-            }
-          />{" "}
-          
-          <Route path="/login" element={<LoginSignup />} />
-        </Routes>
-      </BrowserRouter>
+      {user.currentUser ? (
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div>
+                  <Header />
+                  <Howtouse />
+                  <Aboutus />
+                  <Faq />
+                  <Footer />
+                </div>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      ) : (
+       <LoginSignup />
+      )}
     </div>
   );
 }
