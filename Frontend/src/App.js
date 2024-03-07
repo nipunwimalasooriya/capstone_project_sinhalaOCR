@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginSignup from "./Pages/LoginSignup";
 import { selectUsers } from "./store/usersSlice.js";
 import { useSelector } from "react-redux";
+import HomePage from './Pages/HomePage.jsx';
 
 function App() {
   const user = useSelector(selectUsers);
@@ -33,7 +34,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       ) : (
-       <LoginSignup />
+       <LoginSignup/>
       )}
     </div>
   );
