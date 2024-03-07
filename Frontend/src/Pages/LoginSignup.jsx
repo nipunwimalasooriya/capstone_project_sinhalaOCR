@@ -179,7 +179,7 @@ const LoginSignup = () => {
 
         {error && <div className="error">{error}</div>}
 
-        <p onClick={handlePasswordReset}>Forgot Password ?</p>
+        <p className="fgt-pass" onClick={handlePasswordReset}>Forgot Password ?</p>
       </div>
     </div>
   );

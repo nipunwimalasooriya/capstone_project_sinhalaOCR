@@ -81,21 +81,21 @@ const Header = () => {
         });
   };
 
-  const uploadImage = () => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.style.display = "none"; // Hide the input element
-    document.body.appendChild(input); // Append the input element to the document body
-    input.click();
+  // const uploadImage = () => {
+  //   const input = document.createElement("input");
+  //   input.type = "file";
+  //   input.accept = "image/*";
+  //   input.style.display = "none"; // Hide the input element
+  //   document.body.appendChild(input); // Append the input element to the document body
+  //   input.click();
 
-    // Listen for the 'change' event on the input element
-    input.addEventListener("change", (event) => {
-      handleFileSelect(event);
-      // Remove the input element after processing
-      document.body.removeChild(input);
-    });
-  };
+  //   // Listen for the 'change' event on the input element
+  //   input.addEventListener("change", (event) => {
+  //     handleFileSelect(event);
+  //     // Remove the input element after processing
+  //     document.body.removeChild(input);
+  //   });
+  // };
 
   function getConvertedFiles(taskID, numFiles) {
     // Assuming the server provides an API endpoint to fetch the converted files

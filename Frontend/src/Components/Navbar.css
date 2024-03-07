@@ -1,64 +1,69 @@
-.navbar{
-    display: flex;
-    justify-content: space-around;
-    padding: 1px;
-    box-shadow: 0 2px 5px -3px black;
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 2px 5px -3px black;
+  background-color: #fff; /* Change to your preferred background color */
 }
 
-.nav-logo{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-
+.nav-logo img {
+  width: 150px;
+  height: auto;
 }
 
-.nav-logo img{
-    width: 150px;
-    height: auto;
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+  justify-content: center; /* Center the list items */
 }
 
-.nav-menu{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 50px;
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
-    
+.nav-menu li {
+  cursor: pointer;
 }
 
-.nav-menu li{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    cursor: pointer;
+.nav-menu li a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease; /* Add transition for smoother color change */
+}
+
+.nav-menu li a:hover {
+  color: #004aad; /* Change to your preferred hover color */
+}
+
+.nav-menu li.active a {
+  border-bottom: 2px solid #004aad; /* Add underline for active link */
 }
 
 .nav-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
-
-.nav-login button{
-    align-items: center;
-    width: 150px;
-    height: 50px;
-    outline: none;
-    border: 1px solid #004aad;
-    border-radius: 25px;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    background: #004aad;
-    cursor: pointer;
-    margin-bottom: 15px;
+.nav-login-button  {
+  width: 150px;
+  height: 50px;
+  outline: none;
+  border: none; 
+  border-radius: 25px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #e93a3a; /* Red background */
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smoother color change */
 }
 
-.nav-login button:active{
-    background: white;
-    color: black;
+.nav-login-button:hover {
+  background-color: #ff1810; /* Change to your preferred hover background color */
+  color: white;
 }
