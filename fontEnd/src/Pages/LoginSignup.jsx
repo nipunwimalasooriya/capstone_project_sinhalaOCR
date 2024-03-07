@@ -1,50 +1,150 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
 import Footer from "../Components/Footer";
+import { auth } from "../firebase/config.js";
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/usersSlice.js";
+import Navbar from "../Components/Navbar.jsx";
 
 const LoginSignup = () => {
-    const [state, setState] = useState("Login");
+  const dispatch = useDispatch();
+  const [state, setState] = useState("Login");
+  const [userCredentials, setUserCredentials] = useState({});
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [error, setError] = useState("");
 
-    const handleSignup = async () => {
-        const userData = {
-            name: document.querySelector('input[name="name"]').value,
-            email: document.querySelector('input[name="email"]').value,
-            password: document.querySelector('input[name="password"]').value,
-        };
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(
+        setUser({
+          id: user.uid,
+          email: user.email,
+        })
+      );
+    } else {
+      dispatch(setUser(null));
+    }
+  });
 
-        // Make a POST request to the backend
-        const response = await fetch('http://localhost:5000/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        });
+  // To Handle the user credentials
+  function handleCredentials(e) {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+  }
 
-        const result = await response.json();
-        console.log(result);
-    };
+  function handleSignup(e) {
+    e.preventDefault();
+    setError("");
 
-    return (
-        <div className="loginsignup">
-            <div className="loginsignup-container">
-                <h1>{state}</h1>
-                <div className="loginsignup-fields">
-                    {state === "Sign Up" ? <input type="text" name="name" placeholder="Your Name" /> : <></>}
-                    <input type="email" name="email" placeholder="Email Address" />
-                    <input type="password" name="password" placeholder="Password" />
-                </div>
-                <div className="loginsignup-agree">
-                    <input type="checkbox" name='' id='' />
-                    <p>By Continue, I Agree to the Terms of use & Privacy Policy</p>
-                </div>
-                <button onClick={handleSignup}>Continue</button>
-                {state === "Sign Up" ? <p className="loginsignup-login">Already have an account <span onClick={() => { setState("Login") }}> Login Here </span></p>
-                    : <p className="loginsignup-login">Create an Account <span onClick={() => { setState("Sign Up") }}> Click Here </span></p>}
-            </div>
-            <Footer />
-        </div>
-    );
+    createUserWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      // .then((userCredential) => {
+      //   // Signed up
+
+      //   console.log(userCredential.user);
+      //   dispatch(
+      //     setUser({
+      //       id: userCredential.user.uid,
+      //       email: userCredential.user.email,
+      //     })
+      //   );
+      // })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    setError("");
+
+    signInWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      // .then((userCredential) => {
+      //   console.log(userCredential.user);
+      //   dispatch(
+      //     setUser({
+      //       id: userCredential.user.uid,
+      //       email: userCredential.user.email,
+      //     })
+      //   );
+      // })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
+
+  function handlePasswordReset() {
+    const email = prompt("Enter your email to reset the password");
+    sendPasswordResetEmail(auth, email);
+    alert("Password reset email has been sent to your email");
+  }
+
+  return (
+
+   <div><div className="loginsignup">
+   <div className="loginsignup-container">
+     <h1>{state}</h1>
+     <div className="loginsignup-fields">
+       <form className={`add-form login`}>
+         <div className="form-control">
+           <label>Email *</label>
+           <input
+             type="text"
+             name="email"
+             onChange={(e) => {
+               handleCredentials(e);
+             }}
+             placeholder="Enter your email"
+           />
+         </div>
+         <div className="form-control">
+           <label>Password *</label>
+           <input
+             type="password"
+             name="password"
+             placeholder="Enter your password"
+             onChange={(e) => {
+               handleCredentials(e);
+             }}
+           />
+         </div>
+       </form>
+     </div>
+     <div className="loginsignup-agree">
+       {/* Checkbox and agreement text */}
+     </div>
+     <div className="login-type">
+       <button
+         onClick={(e) => {
+           handleLogin(e);
+         }}
+       >
+         Login
+       </button>
+       <button onClick={(e) => handleSignup(e)}>Signup</button>
+     </div>
+
+     {error && <div className="error">{error}</div>}
+
+     <p onClick={handlePasswordReset}>Forgot Password? *</p>
+   </div>
+   <Footer />
+ </div></div>
+    
+  );
 };
 
 export default LoginSignup;
