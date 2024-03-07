@@ -10,9 +10,9 @@ import ocr
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-# @app.get("/")
-# def home(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/")
+def home():
+    return {"message": "Server started successfully!"}
 
 @app.post("/api/v1/extract_text")
 async def extract_text(image: UploadFile = File(...)):
