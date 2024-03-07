@@ -16,10 +16,10 @@ const Navbar = () => {
                 <li>About Us</li>
                 <li>FAQ</li>
             </ul>
-            <div className="nav-login">
+            {/* <div className="nav-login">
                 <Link to='/login'><button>Login</button></Link>
 
-            </div>
+            </div> */}
         </div>
     )
 }
