@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../store/usersSlice.js";
 
 const Navbar = () => {
-  const dispatch = useDispatch();  // Move useDispatch outside the function
+  const dispatch = useDispatch();
 
   function handleSignOut() {
     if (window.confirm("Are you sure you want to log out?")) {
@@ -30,11 +30,17 @@ const Navbar = () => {
         </div>
       </Link>
       <ul className="nav-menu">
-        <li>How To Use</li>
-        <li>About Us</li>
-        <li>FAQ</li>
+        <li>
+          <Link to="/how-to-use">How To Use</Link>
+        </li>
+        <li>
+          <Link to="/about-us">About Us</Link>
+        </li>
+        <li>
+          <Link to="/faq">FAQ</Link>
+        </li>
       </ul>
-      <button onClick={handleSignOut}>Logout</button>
+      <button className="nav-login-button" onClick={handleSignOut}>Logout</button>
     </div>
   );
 };
