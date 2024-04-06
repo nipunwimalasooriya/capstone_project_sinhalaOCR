@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import logo from "../images/Sinhala.png";
+import logo from "../images/logo.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config.js";
 import { useDispatch } from "react-redux";

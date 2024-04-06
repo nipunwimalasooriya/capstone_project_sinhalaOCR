@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import footer_logo from '../images/Sinhala.png'
+import footer_logo from '../images/logo.png'
 import footer_icon1 from '../images/footicon1.png'
 import footer_icon2 from '../images/footicon2.png'
 import footer_icon3 from '../images/footicon3.png'
