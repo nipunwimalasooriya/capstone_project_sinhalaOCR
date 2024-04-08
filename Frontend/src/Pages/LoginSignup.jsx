@@ -11,6 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/usersSlice.js";
 import { toast } from "react-toastify";
+import logo from "../images/logo.png";
 
 const LoginSignup = () => {
   const dispatch = useDispatch();
@@ -126,7 +127,9 @@ const LoginSignup = () => {
     <div className="loginsignup">
       <div className="loginsignup-container">
         <div className="topic">
-          <h1>Sinhala OCR</h1>
+          <div className="nav-logo">
+            <img src={logo} alt="" />
+          </div>
         </div>
 
         <div className="loginsignup-fields">

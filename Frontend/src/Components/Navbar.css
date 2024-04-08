@@ -57,13 +57,13 @@
   color: white;
   font-size: 18px;
   font-weight: 700;
-  background-color: #e93a3a; /* Red background */
+  background-color: #d75252; /* Red background */
   cursor: pointer;
   margin-bottom: 15px;
   transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smoother color change */
 }
 
 .nav-login-button:hover {
-  background-color: #ff1810; /* Change to your preferred hover background color */
+  background-color: rgb(255, 0, 0); /* Change to your preferred hover background color */
   color: white;
 }

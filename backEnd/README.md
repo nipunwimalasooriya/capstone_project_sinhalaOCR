@@ -23,6 +23,8 @@ pip install six==1.15.0
 pip install starlette==0.13.6
 pip install typing-extensions==3.7.4.3
 pip install uvicorn==0.12.2
+pip install opencv-python
+pip install pytest pytest-asyncio
 ```
 
 ## Starting a virtual environment and backend server
