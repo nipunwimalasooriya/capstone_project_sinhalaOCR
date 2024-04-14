@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request, File, UploadFile, BackgroundTasks
 from fastapi.templating import Jinja2Templates
+import os
+import uuid
 
 import ocr
 
@@ -13,7 +15,7 @@ def home():
 @app.post("/api/v1/extract_text")
 async def extract_text(image: UploadFile = File(...)):
     text = await ocr.read_image(await image.read())
-    return {"filename": image.filename, "text": text}
+    return {"filename": str(image.filename), "text": text}
 
 @app.post("/api/v1/bulk_extract_text")
 async def bulk_extract_text(request: Request, bg_task: BackgroundTasks):
@@ -34,4 +36,3 @@ async def bulk_output(task_id):
     # This endpoint can be used to retrieve processed text if you've stored it
     # in a database or dictionary in the bulk_extract_text function
     return {"task_id": task_id, "output": "Not implemented"}  # Modify as per your implementation
-
