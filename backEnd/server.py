@@ -15,7 +15,14 @@ def home():
 @app.post("/api/v1/extract_text")
 async def extract_text(image: UploadFile = File(...)):
     text = await ocr.read_image(await image.read())
-    return {"filename": str(image.filename), "text": text}
+    filename = image.filename
+    if isinstance(filename, str):
+        filename = filename
+    elif hasattr(filename, "decode"):
+        filename = filename.decode()
+    else:
+        filename = str(filename)
+    return {"filename": filename, "text": text}
 
 @app.post("/api/v1/bulk_extract_text")
 async def bulk_extract_text(request: Request, bg_task: BackgroundTasks):
