@@ -26,3 +26,20 @@ async def read_image(img_path, lang='sin'):
     except Exception as e:
         return f"[ERROR] Unable to process file: {img_path}, Error: {e}"
 
+async def read_images_from_dir(dir_path, lang='sin'):
+    """
+    Performs OCR on all images present in a directory
+
+    :dir_path: str, path to the directory of images
+    :lang: str, language to be used while conversion (optional, default is english)
+
+    Returns
+    :converted_text: dict, mapping of filename to converted text for each image
+    """
+
+    converted_text = {}
+    for file_ in os.listdir(dir_path):
+        if file_.endswith(('png', 'jpeg', 'jpg')):
+            text = await read_image(os.path.join(dir_path, file_), lang=lang)
+            converted_text[os.path.join(dir_path, file_)] = text
+    return converted_text
