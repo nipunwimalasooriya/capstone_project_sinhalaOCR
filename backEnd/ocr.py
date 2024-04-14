@@ -2,10 +2,10 @@ import cv2
 import os
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# Assuming Tesseract is installed and in the system PATH on Ubuntu
+pytesseract.pytesseract.tesseract_cmd = 'tesseract'  # No need for full path
 
-
-async def read_image(img_path, lang='sin', save_processed_image=True, processed_image_path="D:\ssss\processed_image.jpg"):
+async def read_image(img_path, lang='sin', save_processed_image=True, processed_image_path="/tmp/processed_image.jpg"):
     try:
         # Read image using OpenCV
         img = cv2.imread(img_path)
