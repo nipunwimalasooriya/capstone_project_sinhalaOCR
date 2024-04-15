@@ -91,10 +91,8 @@ const LoginSignup = () => {
               error.code === "auth/user-not-found"
           ) {
             toast.error("Invalid email or password. Please check your credentials.");
-          } else if (error.code === "auth/wrong-password") {
-            toast.error("Invalid password. Please check your password.");
           } else {
-            toast.error("Login failed. Please try again later.");
+            toast.error("Invalid email or password. Please check your credentials.");
           }
         });
   }
